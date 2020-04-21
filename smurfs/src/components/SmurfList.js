@@ -6,8 +6,7 @@ import { smurfContext } from "./App";
 
 const SmurfList = () => {
 const smurfList = useContext(smurfContext);
-console.log(smurfContext);
-console.log(smurfList);
+console.log(`smurfList SmurfList.js`, smurfList);
 return(
   <div>
   {!!smurfList.length ? smurfList.map(smurf =>(

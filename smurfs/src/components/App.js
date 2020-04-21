@@ -4,16 +4,19 @@ import SmurfForm from './SmurfForm';
 import SmurfList from './SmurfList';
 
 import axios from 'axios';
-// import SmurfForm from './SmurfForm';
 
-export const smurfContext = createContext();
+//creating variable for create Context to call in other files
+export let smurfContext = createContext();
 
 export const App = () => {
-  const [smurfs, setSmurfs] = useState([])
+  // setting up hook statement to have an updator function for state.
+  let [smurfs, setSmurfs] = useState([])
 useEffect(() => {
   axios.get(`http://localhost:3333/smurfs`)
         .then(res => {
-          console.log(res.data)
+          console.log(`res.data App.js`, res.data)
+          //setting the variable in the hook statement equal to the resposse from the axios.get
+
           setSmurfs(res.data);
         })
         .catch(err => {
@@ -23,12 +26,14 @@ useEffect(() => {
       },
 
       []);
-      console.log(smurfs);
+      console.log(`smurfs varray App.js`,smurfs);
     return (
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
-        <SmurfForm/>
+
+        {/*passing the Provider constructor smurfs through the keyword value and wrapping smurfList in it so it has access to that conetxt*/}
         <smurfContext.Provider value = {smurfs}>
+          <SmurfForm/>
           <SmurfList/>
         </smurfContext.Provider>
       </div>
